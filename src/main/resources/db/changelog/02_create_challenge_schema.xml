@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="02" author="terrifyingAnt">
+        <createTable tableName="challenge_table" >
+            <column name="challenge_id" type="int" autoIncrement="true">
+                <constraints nullable="false" unique="true" primaryKey="true"/>
+            </column>
+            <column name="challenge_goal" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="challenge_start_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="challenge_end_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="challenge_status" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="challenge_prize" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="challenge_company_owner" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="challenge_table" baseColumnNames="challenge_company_owner"
+            constraintName="challenge_owner_fk"
+            referencedTableName="user_table" referencedColumnNames="user_id"/>
+    </changeSet>
+</databaseChangeLog>

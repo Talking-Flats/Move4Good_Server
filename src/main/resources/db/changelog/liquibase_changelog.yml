@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/01_create_user_schema.xml
+  - include:
+      file: db/changelog/02_create_challenge_schema.xml
+  - include:
+      file: db/changelog/03_create_user_in_challenge_schema.xml

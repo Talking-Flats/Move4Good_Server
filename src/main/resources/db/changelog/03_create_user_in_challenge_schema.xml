@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+        <changeSet id="03" author="terrifyingAnt">
+        <createTable tableName="user_in_challenge_table" >
+            <!-- табличца с реализующая связь многи ко многим между пользователями и челленджами -->
+            <column name="user_in_challange_id" type="int" autoIncrement="true">
+                <constraints nullable="false" unique="true" primaryKey="true"/>
+            </column>
+            <column name="challenge_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="temp_results_steps" type="int">
+                <constraints nullable="true"/>
+            </column>
+            <column name="temp_results_speed" type="double">
+                <constraints nullable="true"/>
+            </column>
+            <column name="temp_results_time" type="double">
+                <constraints nullable="true"/>
+            </column>
+            <column name="temp_results_distance" type="double">
+                <constraints nullable="true"/>
+            </column>
+            <column name="challange_done" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="challange_src" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="user_in_challenge_table" baseColumnNames="user_id"
+            constraintName="user_fk"
+            referencedTableName="user_table" referencedColumnNames="user_id"/>
+
+        <addForeignKeyConstraint baseTableName="user_in_challenge_table" baseColumnNames="challenge_id"
+            constraintName="challenge_fk"
+            referencedTableName="challenge_table" referencedColumnNames="challenge_id"/>
+    </changeSet>
+</databaseChangeLog>
